@@ -82,6 +82,7 @@ const ImageGallery: React.FC = () => {
         w="100%"
         borderRadius="xl"
         src={image.url}
+        _hover={ { backdropContrast:'#000' }}
         alt="Alt"
       />
       <Box
