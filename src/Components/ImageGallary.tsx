@@ -72,12 +72,11 @@ const ImageGallery: React.FC = () => {
         sx={{ columnCount: [1, 2, 3], columnGap: "8px" }}
       >
         {images.map((image, i) => (
-          <Grid position="relative" onClick={() => {
+          <Grid key={image.id}  position="relative" onClick={() => {
             setSelectedImage(image)
             onOpen()
           }}>
             <Image
-            key={i}
             w="100%"
             borderRadius="xl"
             mb={2}
