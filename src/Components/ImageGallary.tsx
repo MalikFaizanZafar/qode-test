@@ -9,13 +9,11 @@ import { getFirestore, collection,  onSnapshot } from "firebase/firestore";
 import firebase_app from "../firebase/config";
 import ImageCard from "./ImageCard";
 import { getUserInfo } from "../helpers/getUserInfo";
-import { getPhotoComments } from "@/helpers/getPhotoComments";
-import { ChatIcon } from '@chakra-ui/icons'
 
 const ImageGallery: React.FC = () => {
     const [loading, setLoading] = useState<boolean>(true)
-    const [images, setImages] = useState<{id: string, url: string, userName: string | undefined, userPhoto: string | undefined, commentsCount: number}[]>([]);
-    const [selectedImage, setSelectedImage] = useState<{id: string, url: string, userName: string | undefined, userPhoto: string | undefined, commentsCount: number}>()
+    const [images, setImages] = useState<{id: string, url: string, userName: string | undefined, userPhoto: string | undefined}[]>([]);
+    const [selectedImage, setSelectedImage] = useState<{id: string, url: string, userName: string | undefined, userPhoto: string | undefined}>()
     const { isOpen, onOpen, onClose } = useDisclosure()
     useEffect(() => {
         const fetchImages = async () => {
@@ -27,8 +25,7 @@ const ImageGallery: React.FC = () => {
             const imagesData = await Promise.all(querySnapshot.docs.map(async doc => {
               const imageData = doc.data();
               const userInfo = await getUserInfo(imageData.userId);
-              const photoComments = await getPhotoComments(doc.id);
-              return { id: doc.id, url: imageData.url, userName: userInfo?.name, userPhoto: userInfo?.photoUrl, commentsCount: photoComments.length };
+              return { id: doc.id, url: imageData.url, userName: userInfo?.name, userPhoto: userInfo?.photoUrl };
             }));
             
             setImages(imagesData);
@@ -84,14 +81,6 @@ const ImageGallery: React.FC = () => {
             alt="Alt"
             cursor="pointer"
           />
-          <Box borderTopLeftRadius="5px" padding="3px" position="absolute" display="flex" alignItems="center" backgroundColor="black" justifyContent="space-between">
-           <span style={{color: 'white', marginRight: '10px'}}>
-           <ChatIcon />
-           <span style={{marginLeft: '4px'}}>
-           {image.commentsCount}
-           </span>
-           </span>
-          </Box>
           </Grid>
         ))}
       </Box>
