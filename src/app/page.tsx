@@ -9,7 +9,7 @@ export default function Home() {
 
   return (
   <Flex direction={'column'} h="100vh" >
-     <Box>
+     <Box shadow={'md'}>
         <NavBar />
         {user &&<ImageUpload/>}
       </Box>
