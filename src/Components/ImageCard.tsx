@@ -75,13 +75,13 @@ interface ImageCardProps {
           <Grid>
             <Image objectFit="cover" objectPosition="center" w="1000px" h="800px" src={image.url} alt="Image" />
           </Grid>
-          <Grid display="flex" >
+          <Grid display="flex"  >
           <Box p="6" mt="auto">
-          <Box display="flex" marginBottom="10">
-            <div style={{display: 'flex', alignItems: 'center',}}>
+          <Box display="flex" marginBottom="10" >
+            <Box display={'flex'} alignItems={'center'} >
             <Avatar name={image.userName} src={image.userPhoto} />
-            <span style={{fontSize: '10px', marginLeft: '2px', fontWeight: 'bold'}}>{image.userName}</span>
-            </div>
+            <span style={{fontSize: '10px', marginLeft: '5px', fontWeight: 'bold'}}>{image.userName}</span>
+            </Box>
           </Box>
           <hr />
           <VStack overflow="scroll" h="600px" align="start" spacing={2} mt={4}>
@@ -92,7 +92,7 @@ interface ImageCardProps {
             ))}
           </VStack>
           {user && (  
-            <HStack spacing={2} mt={4}>
+            <HStack spacing={2} mt={4} >
               <Input 
                 variant="filled" 
                 placeholder="Write a comment..." 
