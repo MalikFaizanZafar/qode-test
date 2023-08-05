@@ -79,11 +79,11 @@ interface ImageCardProps {
           </Grid>
           <Grid display="flex">
           <Box p="6" mt="auto">
-          <Box display="flex" marginBottom="5">
-            <Box display="flex" alignItems="center">
+          <Box display="flex" marginBottom="10">
+            <div style={{display: 'flex', alignItems: 'center',}}>
             <Avatar name={image.userName} src={image.userPhoto} />
             <span style={{fontSize: '10px', marginLeft: '2px', fontWeight: 'bold'}}>{image.userName}</span>
-            </Box>
+            </div>
           </Box>
           <hr />
           {user && (  
