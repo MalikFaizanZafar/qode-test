@@ -29,8 +29,6 @@ interface ImageCardProps {
             const commentsData = commentsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
             setComments(commentsData);
           });
-      
-          // Remember to unsubscribe from your real-time listener when your component unmounts.
           return unsubscribe;
 
         };
@@ -77,7 +75,7 @@ interface ImageCardProps {
           <Grid>
             <Image objectFit="cover" objectPosition="center" w="1000px" h="800px" src={image.url} alt="Image" />
           </Grid>
-          <Grid display="flex">
+          <Grid display="flex" >
           <Box p="6" mt="auto">
           <Box display="flex" marginBottom="10">
             <div style={{display: 'flex', alignItems: 'center',}}>
@@ -86,6 +84,13 @@ interface ImageCardProps {
             </div>
           </Box>
           <hr />
+          <VStack overflow="scroll" h="600px" align="start" spacing={2} mt={4}>
+            {comments.map(comment => (
+              <Box key={comment.id} bg="gray.100" p={2} borderRadius="md">
+                <Text><strong>@{comment.userName}:</strong> {comment.text}</Text>
+              </Box>
+            ))}
+          </VStack>
           {user && (  
             <HStack spacing={2} mt={4}>
               <Input 
@@ -97,13 +102,6 @@ interface ImageCardProps {
               <Button bgColor={'#FF0080'} textColor={'white'}  _hover={{ bg: '#FF3399', textColor: 'white' }} onClick={handleCommentSubmit}>Post</Button>
             </HStack>
           )}
-          <VStack overflow="scroll" h="800px" align="start" spacing={2} mt={4}>
-            {comments.map(comment => (
-              <Box key={comment.id} bg="gray.100" p={2} borderRadius="md">
-                <Text><strong>@{comment.userName}:</strong> {comment.text}</Text>
-              </Box>
-            ))}
-          </VStack>
         </Box>
           </Grid>
         </Grid>
