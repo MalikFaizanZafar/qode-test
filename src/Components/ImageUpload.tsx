@@ -120,7 +120,7 @@ const ImageUpload: React.FC = () => {
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={handleUpload}>
+            <Button colorScheme="blue" mr={3} onClick={handleUpload} bgColor={'#FF0080'} textColor={'white'}  _hover={{ bg: '#FF3399', textColor: 'white' }}>
               Upload
             </Button>
             <Button variant="ghost" onClick={onClose}>

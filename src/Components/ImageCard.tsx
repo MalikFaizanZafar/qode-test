@@ -1,14 +1,13 @@
 
 import firebase_app from "@/firebase/config";
 import useCurrentUser from "@/hooks/useCurrentUser";
-import { Box, Button,  HStack, Heading, Image, Input, Text,VStack,useToast } from "@chakra-ui/react";
+import { Box, Button,  HStack, Image, Input, Text,VStack,useToast , Grid, Avatar} from "@chakra-ui/react";
 import { addDoc, collection,  getFirestore, onSnapshot, orderBy, query, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
 
-
 interface ImageCardProps {
     image: any;
-    userName: string;
+    userName: string | undefined;
   }
   
   const ImageCard: React.FC<ImageCardProps> = ({ image, userName }) => {
@@ -74,24 +73,19 @@ interface ImageCardProps {
         }
       };
     return (
-        <Box maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden" mb={4} display="flex" flexDirection="column" height="100%">
-        <Box flexGrow={1}>
-          <Image src={image.url} alt="Image" />
-        </Box>
-      
-        <Box p="6" mt="auto">
-          <Box display="flex" alignItems="baseline">
-            <Heading size="sm" color="gray.500">@{image.userName}</Heading>
+        <Grid display="flex" alignItems="start" >
+          <Grid>
+            <Image objectFit="cover" objectPosition="center" w="1000px" h="800px" src={image.url} alt="Image" />
+          </Grid>
+          <Grid display="flex">
+          <Box p="6" mt="auto">
+          <Box display="flex" marginBottom="5">
+            <Box display="flex" alignItems="center">
+            <Avatar name={image.userName} src={image.userPhoto} />
+            <span style={{fontSize: '10px', marginLeft: '2px', fontWeight: 'bold'}}>{image.userName}</span>
+            </Box>
           </Box>
-      
-          <VStack align="start" spacing={2} mt={4}>
-            {comments.map(comment => (
-              <Box key={comment.id} bg="gray.100" p={2} borderRadius="md">
-                <Text><strong>@{comment.userName}:</strong> {comment.text}</Text>
-              </Box>
-            ))}
-          </VStack>
-      
+          <hr />
           {user && (  
             <HStack spacing={2} mt={4}>
               <Input 
@@ -100,11 +94,19 @@ interface ImageCardProps {
                 value={newComment} 
                 onChange={(e) => setNewComment(e.target.value)} 
               />
-              <Button colorScheme="blue" onClick={handleCommentSubmit}>Post</Button>
+              <Button bgColor={'#FF0080'} textColor={'white'}  _hover={{ bg: '#FF3399', textColor: 'white' }} onClick={handleCommentSubmit}>Post</Button>
             </HStack>
           )}
+          <VStack overflow="scroll" h="800px" align="start" spacing={2} mt={4}>
+            {comments.map(comment => (
+              <Box key={comment.id} bg="gray.100" p={2} borderRadius="md">
+                <Text><strong>@{comment.userName}:</strong> {comment.text}</Text>
+              </Box>
+            ))}
+          </VStack>
         </Box>
-      </Box>
+          </Grid>
+        </Grid>
     )
   }
 
