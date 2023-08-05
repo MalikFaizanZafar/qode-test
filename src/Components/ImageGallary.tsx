@@ -84,11 +84,7 @@ const ImageGallery: React.FC = () => {
             alt="Alt"
             cursor="pointer"
           />
-          <Box position="absolute" display="flex" alignItems="center" backgroundColor="black" width="100%" justifyContent="space-between">
-           <Box display="flex" alignItems="center">
-           <Avatar borderRadius="0" name={image.userName} src={image.userPhoto} />
-           <span style={{fontSize: '10px', marginLeft: '2px', color: 'white', fontWeight: 'bold'}}>{image.userName}</span>
-           </Box>
+          <Box borderTopLeftRadius="5px" padding="3px" position="absolute" display="flex" alignItems="center" backgroundColor="black" justifyContent="space-between">
            <span style={{color: 'white', marginRight: '10px'}}>
            <ChatIcon />
            <span style={{marginLeft: '4px'}}>
